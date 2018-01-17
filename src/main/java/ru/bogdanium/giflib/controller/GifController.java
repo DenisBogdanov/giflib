@@ -1,14 +1,17 @@
 package ru.bogdanium.giflib.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.bogdanium.giflib.data.GifRepository;
 import ru.bogdanium.giflib.model.Gif;
-
-import java.time.LocalDate;
 
 @Controller
 public class GifController {
+
+    @Autowired
+    private GifRepository gifRepository;
 
     @RequestMapping("/")
     public String listGifs() {
@@ -17,8 +20,7 @@ public class GifController {
 
     @RequestMapping("/gif")
     public String gifDetails(ModelMap modelMap) {
-        Gif gif = new Gif("compiler-bot", LocalDate.of(2018, 1, 17),
-                "Denis", true);
+        Gif gif = gifRepository.findByName("android-explosion");
         modelMap.put("gif", gif);
         return "gif-details";
     }
