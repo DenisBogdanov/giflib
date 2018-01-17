@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bogdanium.giflib.data.GifRepository;
 import ru.bogdanium.giflib.model.Gif;
 
+import java.util.List;
+
 @Controller
 public class GifController {
 
@@ -15,7 +17,9 @@ public class GifController {
     private GifRepository gifRepository;
 
     @RequestMapping("/")
-    public String listGifs() {
+    public String listGifs(ModelMap modelMap) {
+        List<Gif> allGifs = gifRepository.getAllGifs();
+        modelMap.put("gifs", allGifs);
         return "home";
     }
 
