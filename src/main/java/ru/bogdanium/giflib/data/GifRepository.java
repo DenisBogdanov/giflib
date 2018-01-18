@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.bogdanium.giflib.model.Gif;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,5 +32,13 @@ public class GifRepository {
         return ALL_GIFS;
     }
 
-
+    public List<Gif> findByCategoryId(int id) {
+        List<Gif> gifs = new ArrayList<>();
+        for (Gif gif : ALL_GIFS) {
+            if (gif.getCategoryId() == id) {
+                gifs.add(gif);
+            }
+        }
+        return gifs;
+    }
 }
